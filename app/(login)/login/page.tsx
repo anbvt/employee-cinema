@@ -17,7 +17,7 @@ const LoginPage = () => {
             password: "zuhot12345"
         }
     });
-    if(session) redirect("/");
+    if(session.data?.user) redirect("/");
     useEffect(() => {
 
     }, []);

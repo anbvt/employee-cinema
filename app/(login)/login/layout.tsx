@@ -1,3 +1,6 @@
+"use client"
+
+import { SessionProvider } from 'next-auth/react'
 import './../../globals.css'
 
 export default function LoginLayout({
@@ -7,10 +10,14 @@ export default function LoginLayout({
 }) {
   return (
     <html lang="en">
-        <head>
-            <title>Zuhot cho Nhân viên</title>
-        </head>
-      <body>{children}</body>
+      <head>
+        <title>Zuhot cho Nhân viên</title>
+      </head>
+      <body>
+        <SessionProvider>
+          {children}
+        </SessionProvider>
+      </body>
     </html>
   )
 }

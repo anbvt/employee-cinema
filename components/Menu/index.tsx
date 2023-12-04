@@ -20,8 +20,8 @@ const MenuComponent = () => {
                 </div>
                 <div className="mt-8 text-center">
                     <img src="https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp" className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28" />
-                    <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">Cynthia J. Watts</h5>
-                    <span className="hidden text-gray-400 lg:block">Nhân viên - Chi nhánh</span>
+                    <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{session?.user.name}</h5>
+                    <span className="hidden text-gray-400 lg:block">Nhân viên - CN: {session?.user.branchName}</span>
                 </div>
                 <ul className="space-y-2 tracking-wide mt-8">
                     <li>
@@ -73,11 +73,11 @@ const MenuComponent = () => {
                 </ul>
             </div>
             <div className="px-6 -mx-6 pt-4 flex justify-between items-center border-t">
-                <button className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
+                <button onClick={()=>signOut()} className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                     </svg>
-                    <button onClick={()=>signOut()} className="group-hover:text-gray-700">Đăng xuất</button>
+                    <span className="group-hover:text-gray-700">Đăng xuất</span>
                 </button>
             </div>
         </div>

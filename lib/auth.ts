@@ -16,13 +16,15 @@ export const authconfig: NextAuthOptions = {
             async authorize(credentials) {
                 try {
                     const {data: cus} = await fetchAPI.post("/staff/loginE", {email: credentials?.email, password: credentials?.password})
+                    console.log(cus);
                     if (cus) {
                         return {
                             id: cus.id,
                             name: cus.name,
                             email: cus.email,
                             role: cus.role,
-                            branchId: cus.branchId
+                            branchId: cus.branchId,
+                            branchName: cus.branchName
                         };
                     }
                 } catch (error: any) {
@@ -48,7 +50,8 @@ export const authconfig: NextAuthOptions = {
                 ...session.user,
                 id: String(token.id),
                 role: token.role,
-                branchId: token.branchId
+                branchId: token.branchId,
+                branchName: token.branchName
             };
             return session;
         },
