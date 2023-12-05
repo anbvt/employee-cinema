@@ -12,8 +12,13 @@ export default function RootLayout({
     <html lang="en">
       <SessionProvider>
         <body>
+          <div className='grid grid-cols-5 gap-5'>
           <Menu />
+          <div className='col-span-4'>
           {children}
+          </div>
+          
+          </div>
         </body>
       </SessionProvider>
     </html>
