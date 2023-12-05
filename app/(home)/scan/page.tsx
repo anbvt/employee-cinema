@@ -7,7 +7,7 @@ const ScanPage = () => {
     const [data, setData] = useState('No result');
 
     const fetchData = async() =>{
-        const {data:result} = await fetchAPI.get("/api/bill?qr="+data); 
+        const {data:result} = await fetchAPI.get("/bill/getByQR/"+data); 
     }
 
     return (
