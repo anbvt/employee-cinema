@@ -11,9 +11,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <SessionProvider>
-        <body>
+        <body >
           <Menu />
-          {children}
+          <div style={{ width: "85%", float: "right" }}>
+            {children}
+          </div>
         </body>
       </SessionProvider>
     </html>
