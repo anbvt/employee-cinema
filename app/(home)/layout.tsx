@@ -17,7 +17,6 @@ export default function RootLayout({
           <div className='col-span-4'>
           {children}
           </div>
-          
           </div>
         </body>
       </SessionProvider>
