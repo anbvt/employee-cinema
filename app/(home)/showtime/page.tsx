@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import React from "react";
 import { useEffect, useState } from "react";
 import { format } from 'date-fns';
+import Link from "next/link";
 const Showtime = () => {
     const [dataShowtime, setDataShowtime] = useState<any>([]);
     const [currentDate, setCurrentDate] = useState(format(new Date(), 'dd-MM-yyyy'));
@@ -16,7 +17,7 @@ const Showtime = () => {
             .catch(error => {
             });
     }, [session]);
-    console.log(dataShowtime);
+
     const groupedShowtime = dataShowtime.reduce((acc: any, s: any) => {
         const key = s.starttime;
         if (!acc[key]) {
@@ -25,16 +26,18 @@ const Showtime = () => {
         acc[key].push(s);
         return acc;
     }, {});
-    console.log(groupedShowtime);
 
     const card = () => {
         return <>
-            {Object.values(groupedShowtime).map((group: any) => {
-                return <div key={group[0].starttime}>
-                    <h2 className="text-2xl ml-4">{group[0].starttime}</h2>
+            {Object.values(groupedShowtime).map((row: any) => {
+                return <div key={row[0].starttime}>
+                    <h2 className="text-2xl ml-4">{row[0].starttime}</h2>
                     <div className="flex flex-wrap -mx-4">
-                        {group.map((s: any) => {
-                            return <div key={s.movieid} className="flex w-full max-w-[26rem] md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
+                        {row.map((s: any) => {
+                            return <Link href={{
+                                pathname: `/showtime/seat`,
+                                query: { id: s.id, staffId: session?.user.id }
+                            }} onClick={() => { localStorage.setItem(`showtime_${s.id}`, JSON.stringify({ movieId: s.movieid, movieName: s.movie, starttime: row[0].starttime,  })); }} key={s.movieid} className="flex w-full max-w-[26rem] md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
                                 <div className="relative flex flex-col w-full rounded-xl bg-white text-gray-700 shadow-lg">
                                     <div className="relative mx-4 mt-4 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
                                         <img className="h-80 w-full" src={`https://zuhot-cinema-images.s3.amazonaws.com/poster-movie/${s.movieid}.png`} alt="ui/ux review check" />
@@ -47,7 +50,7 @@ const Showtime = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         })}
                     </div>
                 </div>

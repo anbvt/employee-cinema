@@ -1,85 +1,38 @@
-import React from 'react';
-import { Badge, Descriptions } from 'antd';
-import type { DescriptionsProps } from 'antd';
+import { NumberUtils } from '@util/NumberUtils';
+import { format } from 'date-fns';
+import React, { useEffect, useState } from 'react';
 
-interface IDescriptionCmp{
-    title:string,
-    data: any
+interface IDescriptionCmp {
+  title: string,
+  data: any
 }
 
-const DescriptionComponent = ({title, data}:IDescriptionCmp) =>{
+const DescriptionComponent = ({ title, data }: IDescriptionCmp) => {
+  return <div className="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <h5 className="mb-5 text-3xl font-bold tracking-tight text-gray-900 dark:text-white text-center" >{title}</h5 >
+    {data == "" ? <div style={{ height: "344px" }}></div> :
+      < div className='grid grid-cols-2 gap-4'>
+        <div>
+          <img src={`https://zuhot-cinema-images.s3.amazonaws.com/poster-movie/${data.poster}.png`} alt="" />
+        </div>
+        <div>
+          <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Tên khách hàng: {data.customerName}</h4>
+          <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Email: {data.customerEmail}</h4>
+          <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Số điện thoại: {data.customerPhone}</h4>
+          <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Quốc tịch: {data.country}</h4>
+          <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Tên phim: {data.movieName}-{data.languageName}</h4>
+          <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Chi nhánh: {data.branchName} - ({data.branchAddress})</h4>
+          <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Phòng: {data.roomName}</h4>
+          <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Số ghế: {data.seats}</h4>
+          {data.toppingName == "" ? <></> :
+            <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Số ghế: {data.toppingName}</h4>}
+          <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Ngày chiếu: {data.showDate ? format(new Date(data.showDate), 'dd/MM/yyyy') : ''} - (giờ chiếu: {data.startTime})</h4>
+          <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Ngày thanh toán: {data.exportDate ? format(new Date(data.exportDate), 'dd/MM/yyyy') : ''}</h4>
+          <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Tổng thanh toán: {NumberUtils.formatCurrency(data.ticketTotalPrice)}</h4>
+          <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Trạng thái: {data.exportStatus == 1 ? "Đã thanh toán" : "Chưa thanh toán"}</h4>
+        </div>
+      </div>}
+  </div >
 
-    
-    const items: DescriptionsProps['items'] = [
-      {
-        key: '1',
-        label: 'Product',
-        children: 'Cloud Database',
-      },
-      {
-        key: '2',
-        label: 'Billing Mode',
-        children: 'Prepaid',
-      },
-      {
-        key: '3',
-        label: 'Automatic Renewal',
-        children: 'YES',
-      },
-      {
-        key: '4',
-        label: 'Order time',
-        children: '2018-04-24 18:00:00',
-      },
-      {
-        key: '5',
-        label: 'Usage Time',
-        children: '2019-04-24 18:00:00',
-        span: 2,
-      },
-      {
-        key: '6',
-        label: 'Status',
-        children: <Badge status="processing" text="Running" />,
-        span: 3,
-      },
-      {
-        key: '7',
-        label: 'Negotiated Amount',
-        children: '$80.00',
-      },
-      {
-        key: '8',
-        label: 'Discount',
-        children: '$20.00',
-      },
-      {
-        key: '9',
-        label: 'Official Receipts',
-        children: '$60.00',
-      },
-      {
-        key: '10',
-        label: 'Config Info',
-        children: (
-          <>
-            Data disk type: MongoDB
-            <br />
-            Database version: 3.4
-            <br />
-            Package: dds.mongo.mid
-            <br />
-            Storage space: 10 GB
-            <br />
-            Replication factor: 3
-            <br />
-            Region: East China 1
-            <br />
-          </>
-        ),
-      },
-    ];
-    
-    return <Descriptions title={title} bordered items={items} />;
 }
 export default DescriptionComponent;

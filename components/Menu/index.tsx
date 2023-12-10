@@ -5,7 +5,15 @@ import { useEffect, useState } from "react";
 
 const MenuComponent = () => {
     const { data: session } = useSession();
-    const [selectedLink, setSelectedLink] = useState(null);
+    const [selectedLink, setSelectedLink] = useState<any>("");
+
+    // const currentURL = window.location.href;
+    // const urlName = currentURL.split('/')[3];
+
+    // useEffect(() => {
+    //     setSelectedLink(urlName);
+    // }, [urlName])
+
     useEffect(() => {
 
     }, [session]);
@@ -28,9 +36,9 @@ const MenuComponent = () => {
                 </div>
                 <ul className="space-y-2 tracking-wide mt-8">
                     <li>
-                        <Link href="/" aria-label="dashboard" className={`relative px-4 py-3 flex items-center space-x-4 rounded-xl text-gray-600 ${selectedLink === "dashboard"
+                        <Link href="/" aria-label="dashboard" className={`relative px-4 py-3 flex items-center space-x-4 rounded-xl text-gray-600 ${selectedLink === ""
                             ? "bg-gradient-to-r from-sky-600 to-cyan-400"
-                            : ""}`} onClick={() => handleLinkClick("dashboard")}>
+                            : ""}`} onClick={() => handleLinkClick("")}>
                             <svg className="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
                                 <path d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8ZM6 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1Z" className="fill-current text-cyan-400 dark:fill-slate-600" />
                                 <path d="M13 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V8Z" className="fill-current text-cyan-200 group-hover:text-cyan-300" />
@@ -60,7 +68,9 @@ const MenuComponent = () => {
                         </a>
                     </li>
                     <li>
-                        <Link href="/scan" className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
+                        <Link href="/scan" className={`px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group  ${selectedLink === "scan"
+                            ? "bg-gradient-to-r from-sky-600 to-cyan-400"
+                            : ""}`} onClick={() => handleLinkClick("scan")}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path className="fill-current text-gray-600 group-hover:text-cyan-600" d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
                                 <path className="fill-current text-gray-300 group-hover:text-cyan-300" d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />

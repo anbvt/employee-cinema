@@ -2,17 +2,17 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { QrReader } from "react-qr-reader";
 
-interface IQr{
-    data:any,
+interface IQr {
+    data: any,
     setData: any
 }
 
 
-const QrScanComponent = ({data, setData}:IQr) => {
+const QrScanComponent = ({ data, setData }: IQr) => {
     const router = useRouter();
 
     useEffect(() => {
-        return () =>{
+        return () => {
             closeCam();
         }
     }, []);
@@ -40,9 +40,9 @@ const QrScanComponent = ({data, setData}:IQr) => {
                         console.info(error);
                     }
                 }}
-                className="w-1/3 mx-auto"
-                constraints={{facingMode: 'environment'}} 
-                />
+                className="w-full mx-auto"
+                constraints={{ facingMode: 'environment' }}
+            />
         </>
     )
 }
