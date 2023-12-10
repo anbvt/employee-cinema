@@ -16,6 +16,8 @@ const ScanPage = () => {
     useEffect(() => {
         fetchData();
     }, [data])
+    console.log(dataBill);
+
 
     return (
         <div className="w-full">

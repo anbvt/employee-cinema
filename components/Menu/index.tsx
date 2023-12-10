@@ -7,12 +7,12 @@ const MenuComponent = () => {
     const { data: session } = useSession();
     const [selectedLink, setSelectedLink] = useState<any>("");
 
-    const currentURL = window.location.href;
-    const urlName = currentURL.split('/')[3];
+    // const currentURL = window.location.href;
+    // const urlName = currentURL.split('/')[3];
 
-    useEffect(() => {
-        setSelectedLink(urlName);
-    }, [urlName])
+    // useEffect(() => {
+    //     setSelectedLink(urlName);
+    // }, [urlName])
 
     useEffect(() => {
 
