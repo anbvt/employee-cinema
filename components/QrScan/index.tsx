@@ -1,6 +1,6 @@
-import { useRouter } from "next/navigation";
+import { Html5QrcodeScanner } from "html5-qrcode"
 import { useEffect, useRef, useState } from "react";
-import { QrReader } from "react-qr-reader";
+
 
 interface IQr {
     data: any,
@@ -9,41 +9,34 @@ interface IQr {
 
 
 const QrScanComponent = ({ data, setData }: IQr) => {
-    const router = useRouter();
-
+    const [scanResult, setScanResult] = useState(null);
     useEffect(() => {
-        return () => {
-            closeCam();
+        const scanner = new Html5QrcodeScanner('reader', {
+            qrbox: {
+                width: 250,
+                height: 250,
+            },
+            fps: 5,
+        }, true);
+
+        scanner.render(success, error);
+
+        function success(result: any) {
+            scanner.clear();
+            setScanResult(result);
+            setData(result);
+        }
+        function error(err: any) {
+            console.warn(err);
+
         }
     }, []);
 
-    const closeCam = async () => {
-        // const stream = await navigator.mediaDevices.getUserMedia({
-        //     audio: false,
-        //     video: true,
-        // });
-        // stream.getTracks().forEach(function (track) {
-        //     track.stop();
-        //     track.enabled = false;
-        // });
-        // window.location.reload();
-    };
-    return (
-        <>
-            <QrReader
-                onResult={(result, error) => {
-                    if (!!result) {
-                        setData(result.getText());
-                    }
 
-                    if (!!error) {
-                        console.info(error);
-                    }
-                }}
-                className="w-full mx-auto"
-                constraints={{ facingMode: 'environment' }}
-            />
-        </>
+    return (<div>
+        <h1>qr</h1>
+        {scanResult ? <div>success: {scanResult}</div> : <div id="reader"></div>}
+    </div>
     )
 }
 export default QrScanComponent;
