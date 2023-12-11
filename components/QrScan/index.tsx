@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { QrReader } from "react-qr-reader";
+// import { QrReader } from "react-qr-reader";
 
 interface IQr {
     data: any,
@@ -30,7 +30,7 @@ const QrScanComponent = ({ data, setData }: IQr) => {
     };
     return (
         <>
-            <QrReader
+            {/* <QrReader
                 onResult={(result, error) => {
                     if (!!result) {
                         setData(result.getText());
@@ -42,7 +42,7 @@ const QrScanComponent = ({ data, setData }: IQr) => {
                 }}
                 className="w-full mx-auto"
                 constraints={{ facingMode: 'environment' }}
-            />
+            /> */}
         </>
     )
 }
