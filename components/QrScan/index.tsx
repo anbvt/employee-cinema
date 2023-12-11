@@ -15,13 +15,11 @@ const QrScanComponent = (props: scanProps) => {
     const ref = useRef<Html5QrcodeScanner | null>(null);
 
     useEffect(() => {
-        // Use reference to avoid recreating the object when double rendered in Dev Strict Mode.
         if (ref.current === null) {
             ref.current = new Html5QrcodeScanner(scanRegionId, { ...props }, verbose);
         }
         const html5QrcodeScanner = ref.current;
 
-        // Timeout to allow the clean-up function to finish in case of double render.
         setTimeout(() => {
             const container = document.getElementById(scanRegionId);
             if (html5QrcodeScanner && container?.innerHTML == "") {
@@ -34,8 +32,6 @@ const QrScanComponent = (props: scanProps) => {
                 html5QrcodeScanner.clear();
             }
         };
-        // Just once when the component mounts.
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return <div id={scanRegionId} />;

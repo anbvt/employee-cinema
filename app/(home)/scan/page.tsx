@@ -1,33 +1,20 @@
 "use client"
 import { DescriptionComponent, QrScanComponent } from "@components";
 import { fetchAPI } from "@hook/fetchAPI";
-import { set } from "date-fns";
 import { QrcodeErrorCallback, QrcodeSuccessCallback } from "html5-qrcode";
-import { Result } from "postcss";
 import { useEffect, useState } from "react";
 
 const ScanPage = () => {
-    const [data, setData] = useState("");
     const [dataBill, setDataBill] = useState("");
 
-    const fetchData = async () => {
-        const { data: result } = await fetchAPI.get("/bill/getByQR/" + data);
-        setDataBill(result);
-    }
-    useEffect(() => {
-        fetchData();
-    }, [data])
+    const handleQrCodeSuccess: QrcodeSuccessCallback = async (result) => {
+        const { data: data } = await fetchAPI.get("/bill/getByQR/" + result);
+        setDataBill(data);
 
-    const handleQrCodeSuccess: QrcodeSuccessCallback = (result) => {
-        console.log('QR Code Scanned Successfully:', result);
-        setData(result);
-        // Xử lý dữ liệu mã QR thành công ở đây
     };
 
-    // Hàm xử lý khi gặp lỗi
     const handleQrCodeError: QrcodeErrorCallback = (error) => {
-        console.error('QR Code Scanning Error:', error);
-        // Xử lý lỗi quét mã QR ở đây
+        // console.error('QR Code Scanning Error:', error);
     };
 
     return (
@@ -38,7 +25,7 @@ const ScanPage = () => {
                     <h1 className="mb-5 text-3xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Màn hình quét</h1>
                     <QrScanComponent
                         qrCodeSuccessCallback={handleQrCodeSuccess}
-                        qrCodeErrorCallback={handleQrCodeError} fps={2}                    /* Các props khác của QrScanComponent (nếu có) */
+                        qrCodeErrorCallback={handleQrCodeError} fps={2}
                     />
                 </div>
                 <span className="col-span-2"><DescriptionComponent title="Thông tin vé" data={dataBill} /></span>

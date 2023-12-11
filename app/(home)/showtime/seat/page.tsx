@@ -1,7 +1,7 @@
 "use client"
 
 import { fetchAPI } from "@hook/fetchAPI";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from 'next/navigation';
 import { useSession } from "next-auth/react";
 import React from "react";
@@ -36,7 +36,7 @@ const Seat = () => {
         });
     }, []);
 
-    const handleClick = async (row: any, index: any) => {
+    const handleClick = useCallback(async (row: any, index: any) => {
         const updatedSeats = [...dataSeat];
         const seat = updatedSeats[row] && updatedSeats[row].seats[index];
         if (seat) {
@@ -55,7 +55,7 @@ const Seat = () => {
             }
             setDataSeat(updatedSeats);
         }
-    };
+    }, [dataSeat, showtimeId, setSelectedSeats, setDataSeat]);
 
     useEffect(() => {
         localStorage.setItem(`seat_${showtimeId}_${staffId}`, JSON.stringify(selectedSeats));
