@@ -106,7 +106,7 @@ const Seat = () => {
             <img src={`https://zuhot-cinema-images.s3.amazonaws.com/poster-movie/${a.movieId}.png`} alt="" />
             <h2 className="text-center text-base  font-medium my-2 text-red-600">{a.movieName}</h2>
             <div className="border-t-4 border-b-4 p-2 border-red-950 ">
-                <h3 className="text-base text-black font-medium mb-1">Tổng ghế: {totalSeat ? "Chưa chọn" : totalSeat}</h3>
+                <h3 className="text-base text-black font-medium mb-1">Tổng ghế: {totalSeat.length <= 0 ? "Chưa chọn" : totalSeat}</h3>
                 <h3 className="text-base text-black font-medium">Tổng tiền: {NumberUtils.formatCurrency(totalPrice || 0)}</h3>
             </div>
             <button onClick={checkSelectedSeat} className="relative w-full inline-flex items-center justify-center p-0.5 mb-1 mt-3 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-600 to-red-400 group-hover:from-red-600 group-hover:to-red-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">

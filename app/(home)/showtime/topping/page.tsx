@@ -22,7 +22,7 @@ const ToppingPage = () => {
     }, [session]);
 
     const onChange = (value: any, id: number, price: number, name: string, toppingofbranchid: any) => {
-        const existingIndex = selectedTopping.findIndex((item: any) => item.toppingOfBranchId === toppingofbranchid);
+        const existingIndex = selectedTopping.findIndex((item: any) => item.toppinngOfBranchId === toppingofbranchid);
         setSelectedTopping((prevToppings: any[]) => {
             const updatedToppings = prevToppings.map((item, index) =>
                 index === existingIndex ? { ...item, quantity: value, total: price * value } : item
@@ -72,7 +72,7 @@ const ToppingPage = () => {
             <img src={`https://zuhot-cinema-images.s3.amazonaws.com/poster-movie/${a.movieId}.png`} alt="" />
             <h2 className="text-center text-base  font-medium my-2 text-red-600">{a.movieName}</h2>
             <div className="border-t-4 border-b-4 p-2 border-red-950 ">
-                <h3 className="text-base text-black font-medium mb-1">Tổng thức ăn: {totalTopping ? "Chưa chọn" : totalTopping}</h3>
+                <h3 className="text-base text-black font-medium mb-1">Tổng thức ăn: {totalTopping}</h3>
                 <h3 className="text-base text-black font-medium">Tổng tiền: {NumberUtils.formatCurrency(totalPrice || 0)}</h3>
             </div>
             <Link href={{
