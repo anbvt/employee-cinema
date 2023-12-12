@@ -1,8 +1,8 @@
 "use client"
 import { fetchAPI } from "@hook/fetchAPI";
-import { Card, LineChart, Metric, SearchSelect, SearchSelectItem, Text, Title } from "@tremor/react";
+import { Card, LineChart, SearchSelect, SearchSelectItem } from "@tremor/react";
 import { DateUtils } from "@util/DateUtils";
-import { Form, Statistic } from "antd";
+import { Form } from "antd";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Loading from "../../../components/Loading";
@@ -74,74 +74,70 @@ const DashBoard = () => {
         <div className="container">
             <div className="my-3">
                 {!session ? <Loading /> : (
-                    <Card>
-                        <Title>Thống kê vé</Title>
-                        <Card className="max-w-xs" decoration="top" decorationColor="indigo">
-                            <Form
-                                form={formTicket}
-                                onFinish={onFinishTicket}
-                                layout={"inline"}
-                                style={{
-                                    maxWidth: 'none'
-                                }}
+                    <Card decoration="top" decorationColor="indigo">
+                        <Form
+                            form={formTicket}
+                            onFinish={onFinishTicket}
+                            layout={"vertical"}
+                            style={{
+                                maxWidth: 'none'
+                            }}
+                        >
+                            <Form.Item
+                                name="branch"
+                                label="Chi Nhánh"
+                                initialValue={session?.user.branchId || '0'}
+                                hidden={session?.user.role != 2}
                             >
-                                <Form.Item
-                                    name="branch"
-                                    label="Chi Nhánh"
-                                    initialValue={session?.user.branchId || '0'}
-                                    hidden={session?.user.role != 2}
+                                <SearchSelect
+                                    placeholder="Chọn chi nhánh"
+                                    onChange={handleTicketChange}
+                                    enableClear={false}
                                 >
-                                    <SearchSelect
-                                        placeholder="Chọn chi nhánh"
-                                        onChange={handleTicketChange}
-                                        enableClear={false}
+                                    <SearchSelectItem
+                                        value={"0"}
                                     >
-                                        <SearchSelectItem
-                                            value={"0"}
-                                        >
-                                            Tất cả
-                                        </SearchSelectItem>
-                                        {branch.length > 0 && (
-                                            branch.map((s: any, idx: number) => (
-                                                <SearchSelectItem
-                                                    key={idx}
-                                                    value={s.id}
-                                                >
-                                                    {s.name}
-                                                </SearchSelectItem>
-                                            ))
-                                        )}
-                                    </SearchSelect>
-                                </Form.Item>
-                                <Form.Item
-                                    name="movie"
-                                    label="Phim"
-                                    initialValue={"0"}
-                                >
-                                    <SearchSelect
-                                        placeholder="Chọn phim"
-                                        onChange={handleTicketChange}
-                                        enableClear={false}
-                                    >
-                                        <SearchSelectItem
-                                            value={"0"}
-                                        >
-                                            Tất cả
-                                        </SearchSelectItem>
-                                        {movie?.map((s: any, idx: number) => (
+                                        Tất cả
+                                    </SearchSelectItem>
+                                    {branch.length > 0 && (
+                                        branch.map((s: any, idx: number) => (
                                             <SearchSelectItem
                                                 key={idx}
-                                                value={s.movieId}
+                                                value={s.id}
                                             >
-                                                {s.movieName}
+                                                {s.name}
                                             </SearchSelectItem>
-                                        ))}
-                                    </SearchSelect>
-                                </Form.Item>
-                            </Form >
-                            <Statistic title="Sales" value={sumTicket} />
-                        </Card>
-                        <LineChart showLegend={false}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               customTooltip={customTooltip} className="h-72 mt-4" noDataText="Không có dữ liệu" colors={["indigo"]} allowDecimals={false} data={ticket} autoMinValue={true} startEndOnly={true} index={"starttime"} categories={["quantity"]} />
+                                        ))
+                                    )}
+                                </SearchSelect>
+                            </Form.Item>
+                            <Form.Item
+                                name="movie"
+                                label="Phim"
+                                initialValue={"0"}
+                            >
+                                <SearchSelect
+                                    placeholder="Chọn phim"
+                                    onChange={handleTicketChange}
+                                    enableClear={false}
+                                >
+                                    <SearchSelectItem
+                                        value={"0"}
+                                    >
+                                        Tất cả
+                                    </SearchSelectItem>
+                                    {movie?.map((s: any, idx: number) => (
+                                        <SearchSelectItem
+                                            key={idx}
+                                            value={s.movieId}
+                                        >
+                                            {s.movieName}
+                                        </SearchSelectItem>
+                                    ))}
+                                </SearchSelect>
+                            </Form.Item>
+                        </Form >
+                        <LineChart showLegend={false} customTooltip={customTooltip} className="h-72 mt-4" noDataText="Không có dữ liệu" colors={["indigo"]} allowDecimals={false} data={ticket} autoMinValue={true} startEndOnly={true} index={"starttime"} categories={["quantity"]} />
                     </Card >
                 )}
             </div >
