@@ -27,7 +27,7 @@ const DescriptionComponent = ({ title, data }: IDescriptionCmp) => {
           <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Phòng: {data.roomName}</h4>
           <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Số ghế: {data.seats}</h4>
           {data.toppingName == "" ? <></> :
-            <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Số ghế: {data.toppingName}</h4>}
+            <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Số topping: {data.toppingName}</h4>}
           <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Ngày chiếu: {data.showDate ? format(new Date(data.showDate), 'dd/MM/yyyy') : ''} - (giờ chiếu: {data.startTime})</h4>
           <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Ngày thanh toán: {data.exportDate ? format(new Date(data.exportDate), 'dd/MM/yyyy') : ''}</h4>
           <h4 className="font-medium text-gray-700 dark:text-gray-400 text-lg py-1">Tổng thanh toán: {NumberUtils.formatCurrency(data.ticketTotalPrice)}</h4>
