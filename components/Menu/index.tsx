@@ -26,7 +26,7 @@ const MenuComponent = () => {
             <div>
                 <div className="-mx-6 px-6 py-4">
                     <Link href="/" title="home">
-                        <img src="https://zuhot-cinema-images.s3.amazonaws.com/logo.png" className="w-32" alt="zuhot logo" />
+                        <img src="https://zuhot-cinema-images.s3.amazonaws.com/logo.png" className="w-full" alt="zuhot logo" />
                     </Link>
                 </div>
                 <div className="mt-8 text-center">
