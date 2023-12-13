@@ -59,15 +59,6 @@ const MenuComponent = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="/test" className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path className="fill-current text-gray-600 group-hover:text-cyan-600" fillRule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clipRule="evenodd" />
-                                <path className="fill-current text-gray-300 group-hover:text-cyan-300" d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z" />
-                            </svg>
-                            <span className="group-hover:text-gray-700">Báo cáo</span>
-                        </Link>
-                    </li>
-                    <li>
                         <Link href="/scan" className={`px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group  ${selectedLink === "scan"
                             ? "bg-gradient-to-r from-sky-600 to-cyan-400"
                             : ""}`} onClick={() => handleLinkClick("scan")}>
@@ -76,15 +67,6 @@ const MenuComponent = () => {
                                 <path className="fill-current text-gray-300 group-hover:text-cyan-300" d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
                             </svg>
                             <span className="group-hover:text-gray-700">Scan QR</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/" className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path className="fill-current text-gray-300 group-hover:text-cyan-300" d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
-                                <path className="fill-current text-gray-600 group-hover:text-cyan-600" fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
-                            </svg>
-                            <span className="group-hover:text-gray-700">Thanh toán</span>
                         </Link>
                     </li>
                 </ul>
